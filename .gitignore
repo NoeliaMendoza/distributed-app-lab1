@@ -1,0 +1,17 @@
+﻿# Dependencies
+node_modules/
+
+# Generated test results
+*-results.json
+*.log
+
+# Local settings and credentials
+.env
+.env.*
+!.env.example
+.vscode/
+.idea/
+
+# Operating system files
+.DS_Store
+Thumbs.db
