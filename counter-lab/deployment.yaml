@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: distributed-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: distributed-app
+  template:
+    metadata:
+      labels:
+        app: distributed-app
+    spec:
+      containers:
+        - name: distributed-app
+          image: distributed-app:v4
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 3000
+          env:
+            - name: COUNTER_SERVICE_URL
+              value: "http://counter-service:4000"
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 3000
+            initialDelaySeconds: 1
+            periodSeconds: 3
